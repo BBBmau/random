@@ -24,6 +24,7 @@ jobs:
        with:
         path: ${{ github.workspace }}/.venv
         key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: ${{ runner.os }}-
      - name: Install poetry
        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
        run: poetry install
