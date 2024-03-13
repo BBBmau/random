@@ -23,7 +23,7 @@ jobs:
        id: cached-poetry-dependencies
        uses: actions/cache@v3
        with:
-        path: temp
+        path: ./temp
         key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
         restore-keys: ${{ runner.os }}-
      - name: Install poetry
