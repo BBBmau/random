@@ -1,5 +1,5 @@
 name: Dependency Setup
-on: workflow_dispatch
+on: workflow_call
 
 
 jobs:
