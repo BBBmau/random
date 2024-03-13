@@ -7,6 +7,9 @@ jobs:
     uses: ./.github/workflows/dependency_setup.yaml
     with:
       cache-key: "mau"
+
+  cache-restore:
+    needs: ["dependency-transfer"]
     steps:
     - name: Load cached venv
       id: cached-poetry-dependencies
@@ -17,18 +20,18 @@ jobs:
   hello-job-1:
     name: Preflight Step
     runs-on: ubuntu-latest
-    needs: ["dependency-transfer"]
+    needs: ["cache-restore"]
     steps:
     - run: poetry run python hello.py
   hello-job-2:
     name: Preflight Step
     runs-on: ubuntu-latest
-    needs: ["dependency-transfer"]
+    needs: ["cache-restore"]
     steps:
     - run: poetry run python hello.py
   hello-job-3:
     name: Preflight Step
     runs-on: ubuntu-latest
-    needs: ["dependency-transfer"]
+    needs: ["cache-restore"]
     steps:
     - run: poetry run python hello.py
