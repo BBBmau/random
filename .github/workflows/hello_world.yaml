@@ -5,6 +5,8 @@ on: workflow_dispatch
 jobs:
   dependency-transfer:
     uses: ./.github/workflows/dependency_setup.yaml
+    with:
+      cache-key: "mau"
   hello-job:
     name: Preflight Step
     runs-on: ubuntu-latest
