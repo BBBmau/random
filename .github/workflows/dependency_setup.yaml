@@ -13,6 +13,7 @@ jobs:
      runs-on: ubuntu-20.04
      steps:
      - uses: actions/checkout@v4
+     - run: ls && pwd
      - name: Install poetry
        run: pipx install poetry
      - uses: actions/setup-python@v5
