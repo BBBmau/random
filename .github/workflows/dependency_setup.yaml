@@ -4,12 +4,14 @@ on: workflow_dispatch
 
 jobs:
   python:
-    - uses: actions/checkout@v4
-    - name: Install poetry
-      run: pipx install poetry
-    - uses: actions/setup-python@v5
-      with:
+     runs-on: ubuntu-20.04
+     steps:
+     - uses: actions/checkout@v4
+     - name: Install poetry
+       run: pipx install poetry
+     - uses: actions/setup-python@v5
+       with:
         python-version: '3.9'
         cache: 'poetry'
-    - run: poetry install
-    - run: poetry run python hello.py
+     - run: poetry install
+     - run: poetry run python hello.py
