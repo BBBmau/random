@@ -6,8 +6,10 @@ on:
 
 
 jobs:
+  dependency-transfer:
+    uses: ./.github/workflows/dependency_setup.yaml
   hello-job:
     name: Preflight Step
     runs-on: ubuntu-latest
     steps:
-      - run: poetry run python hello.py
+    - run: poetry run python hello.py
