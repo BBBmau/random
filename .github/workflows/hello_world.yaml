@@ -8,5 +8,6 @@ jobs:
   hello-job:
     name: Preflight Step
     runs-on: ubuntu-latest
+    needs: ["dependency-transfer"]
     steps:
     - run: poetry run python hello.py
