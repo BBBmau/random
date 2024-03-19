@@ -14,5 +14,5 @@ jobs:
           name: mau-random-test
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           signingKey: ${{ secrets.CACHIX_SIGNING_KEY}}
-      - run: nix-build
-      - run: nix-shell --run "echo OK"
+      - run: cachix use mau-random-test
+      - run: nix-shell -p cowsay lolcat 
