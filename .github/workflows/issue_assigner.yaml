@@ -3,5 +3,6 @@ on: workflow_dispatch
 
 jobs:
     assign:
-        name: starter
-        runs-on: ubuntu-latest
+      runs-on: ubuntu-20.04
+      steps:
+      - uses: BBBmau/issue-assigner-weekly-triage@v0.0.0-alpha
