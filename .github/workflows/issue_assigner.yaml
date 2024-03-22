@@ -1,0 +1,7 @@
+name: Issue Assigner
+on: workflow_dispatch
+
+jobs:
+    assign:
+        name: starter
+        runs-on: ubuntu-latest
