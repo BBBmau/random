@@ -1,8 +1,10 @@
 name: Issue Assigner
-on: workflow_dispatch
+on: issues
 
 jobs:
     assign:
       runs-on: ubuntu-20.04
       steps:
-      - uses: BBBmau/issue-assigner-weekly-triage@v0.0.0-alpha
+      - uses: BBBmau/issue-assigner-weekly-triage@v0.0.1-alpha
+        with:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
