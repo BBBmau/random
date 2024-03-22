@@ -6,3 +6,5 @@ jobs:
       runs-on: ubuntu-20.04
       steps:
       - uses: BBBmau/issue-assigner-weekly-triage@v0.0.1-alpha
+        with:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
