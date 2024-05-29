@@ -7,14 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - uses: actions/github-script@e69ef5462fd455e02edcaf4dd7708eda96b9eda0 # v7.0.0
-        env:
-          DAYS_THRESHOLD: ${{ inputs.dayThreshold }}
         with:
           script: |
                 async function createBranch(){
                   let dateToday = new Date().toJSON().slice(0, 10);
 
-                  const masterRef = await github.rest.git.createRef({
+                  const masterRef = await github.rest.git.getRef({
                     owner: context.repo.owner,
                     repo: context.repo.repo,
                     ref: "ref/heads/master"
