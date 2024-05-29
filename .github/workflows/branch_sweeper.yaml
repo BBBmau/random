@@ -12,10 +12,9 @@ jobs:
       - uses: actions/github-script@e69ef5462fd455e02edcaf4dd7708eda96b9eda0 # v7.0.0
         env:
           DAYS_THRESHOLD: ${{ inputs.dayThreshold }}
-          REPO_NAME: ${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}
         with:
           script: |
-            const { DAYS_THRESHOLD, REPO_NAME } = process.env
+            const { DAYS_THRESHOLD } = process.env
             console.log(`Removing branches not made in the last ${DAYS_THRESHOLD} days`)
 
             function dateDifference(dateToday, branchDate){
@@ -25,18 +24,12 @@ jobs:
             }
             
             async function branchSweeper(owner, repo, daysThreshold){
-                const octokit = new Octokit({
-                    auth: '${secrets.GH_ACTION_TOKEN}'
-                })
                 let dateToday = new Date().toJSON().slice(0, 10);
                 console.log("Today\'s date: ",dateToday);
                 // grab the list of branches then iterate through the list checking for the difference in days
-                const branchList = await octokit.request('GET /repos/{owner}/{repo}/branches', {
-                    owner: owner,
-                    repo: repo,
-                    headers: {
-                      'X-GitHub-Api-Version': '2022-11-28'
-                    }
+                const branchList = await github.rest.repos.listBranches({
+                    owner: context.owner,
+                    repo: context.repo,
                   })
                 
                 for (let i = 0; i < branchList.data.length; i++) {
@@ -44,13 +37,10 @@ jobs:
                     const branchDate = /\d{4,4}-\d{1,2}-\d{1,2}/g.exec(branchName)
                     if (branchDate == null) continue
                     if (dateDifference(dateToday, branchDate) > daysThreshold) { // only happens if difference is greater than 3, we only want to keep the last 3 night branches
-                        const resp = await octokit.request('DELETE /repos/{owner}/{repo}/git/refs/heads/{ref}', {
-                            owner: owner,
-                            repo: repo,
+                        const resp = await github.rest.git.deleteRef({
+                            owner: context.owner,
+                            repo: context.repo,
                             ref: branchName,
-                            headers: {
-                              'X-GitHub-Api-Version': '2022-11-28'
-                            }
                           })
                         if (resp.status == "422"){
                             console.error("Branch doesn\'t exist")
