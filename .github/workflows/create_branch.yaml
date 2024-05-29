@@ -22,18 +22,18 @@ jobs:
 
                   console.log(masterRef)
 
-                  const resp = await github.rest.git.createRef({
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    ref: "ref/heads/UTC-nightly-tests-" + dateToday,
-                    sha: masterRef.data.sha
-                  })
+                #   const resp = await github.rest.git.createRef({
+                #     owner: context.repo.owner,
+                #     repo: context.repo.repo,
+                #     ref: "ref/heads/UTC-nightly-tests-" + dateToday,
+                #     sha: masterRef.data.sha
+                #   })
                   // if (resp.status == "422"){
                   //   console.error("Branch doesn\'t exist")
                   // } else{
                   //   console.log("Deleted branch: " + branchName)
                   // }
-                  console.log(resp)
+                #   console.log(resp)
                 }
 
                 // branchSweeper("BBBmau", "random", 3)
