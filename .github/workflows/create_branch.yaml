@@ -18,13 +18,11 @@ jobs:
                     ref: "heads/master"
                   })
 
-                  console.log(masterRef)
-
                    const resp = await github.rest.git.createRef({
                      owner: context.repo.owner,
                      repo: context.repo.repo,
                      ref: "ref/heads/UTC-nightly-tests-" + dateToday,
-                     sha: masterRef.data.sha
+                     sha: masterRef.data.object.sha
                    })
                    if (resp.status == "422"){
                      console.error("Branch doesn\'t exist")
