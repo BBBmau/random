@@ -13,15 +13,15 @@ jobs:
           script: |
                 async function createBranch(){
                   let dateToday = new Date().toJSON().slice(0, 10);
-                
+
                   const masterRef = await github.rest.git.createRef({
                     owner: context.repo.owner,
                     repo: context.repo.repo,
-                    ref: "ref/heads/main"
+                    ref: "ref/heads/master"
                   })
-                
+
                   console.log(masterRef)
-                
+
                   const resp = await github.rest.git.createRef({
                     owner: context.repo.owner,
                     repo: context.repo.repo,
@@ -35,6 +35,6 @@ jobs:
                   // }
                   console.log(resp)
                 }
-                
+
                 // branchSweeper("BBBmau", "random", 3)
                 createBranch()
