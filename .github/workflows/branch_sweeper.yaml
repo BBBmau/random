@@ -51,4 +51,4 @@ jobs:
                 }
             }
 
-            branchSweeper("${GITHUB_REPOSITORY_OWNER}", "${REPO_NAME}", ${DAYS_THRESHOLD})
+            branchSweeper("${GITHUB_REPOSITORY_OWNER}", "${REPO_NAME}", "${DAYS_THRESHOLD}")
