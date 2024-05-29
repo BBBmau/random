@@ -35,7 +35,7 @@ jobs:
                 for (let i = 0; i < branchList.data.length; i++) {
                     const branchName = branchList.data.at(i).name
                     const branchDate = /\d{4,4}-\d{1,2}-\d{1,2}/g.exec(branchName)
-                    if (branchDate == null) continue
+                    if (branchDate == null) continue // skips if regex fails (is successful if matches with UTC-nightly-test branch format)
                     if (dateDifference(dateToday, branchDate) >= daysThreshold) { // only happens if difference is greater than or equal to 3, we only want to keep the last 3 night branches
                         const resp = await github.rest.git.deleteRef({
                             owner: context.repo.owner,
