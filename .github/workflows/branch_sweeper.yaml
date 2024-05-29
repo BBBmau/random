@@ -40,7 +40,7 @@ jobs:
                         const resp = await github.rest.git.deleteRef({
                             owner: context.repo.owner,
                             repo: context.repo.repo,
-                            ref: branchName,
+                            ref: "heads/" + branchName,
                           })
                         if (resp.status == "422"){
                             console.error("Branch doesn\'t exist")
