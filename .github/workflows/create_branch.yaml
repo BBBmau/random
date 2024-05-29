@@ -1,0 +1,40 @@
+name: Create Branch
+on: 
+  workflow_dispatch:
+
+jobs:
+  branchSweeper:
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/github-script@e69ef5462fd455e02edcaf4dd7708eda96b9eda0 # v7.0.0
+        env:
+          DAYS_THRESHOLD: ${{ inputs.dayThreshold }}
+        with:
+          script: |
+                async function createBranch(){
+                  let dateToday = new Date().toJSON().slice(0, 10);
+                
+                  const masterRef = await github.rest.git.createRef({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    ref: "ref/heads/main"
+                  })
+                
+                  console.log(masterRef)
+                
+                  const resp = await github.rest.git.createRef({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    ref: "ref/heads/UTC-nightly-tests-" + dateToday,
+                    sha: masterRef.data.sha
+                  })
+                  // if (resp.status == "422"){
+                  //   console.error("Branch doesn\'t exist")
+                  // } else{
+                  //   console.log("Deleted branch: " + branchName)
+                  // }
+                  console.log(resp)
+                }
+                
+                // branchSweeper("BBBmau", "random", 3)
+                createBranch()
