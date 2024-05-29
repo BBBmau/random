@@ -15,7 +15,7 @@ jobs:
                   const masterRef = await github.rest.git.getRef({
                     owner: context.repo.owner,
                     repo: context.repo.repo,
-                    ref: "ref/heads/master"
+                    ref: "heads/master"
                   })
 
                   console.log(masterRef)
