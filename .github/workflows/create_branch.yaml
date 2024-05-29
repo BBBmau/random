@@ -21,7 +21,7 @@ jobs:
                    const resp = await github.rest.git.createRef({
                      owner: context.repo.owner,
                      repo: context.repo.repo,
-                     ref: "ref/heads/UTC-nightly-tests-" + dateToday,
+                     ref: "refs/heads/UTC-nightly-tests-" + dateToday,
                      sha: masterRef.data.object.sha
                    })
                    if (resp.status == "422"){
