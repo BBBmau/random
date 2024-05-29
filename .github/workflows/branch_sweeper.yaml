@@ -15,7 +15,7 @@ jobs:
           REPO_NAME: ${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}
         with:
           script: |
-            const { REMOVE_LABEL } = process.env
+            const { DAYS_THRESHOLD, REPO_NAME } = process.env
             console.log(`Removing branches not made in the last ${DAYS_THRESHOLD} days`)
 
             function dateDifference(dateToday, branchDate){
