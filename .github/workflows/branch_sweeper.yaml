@@ -28,8 +28,8 @@ jobs:
                 console.log("Today\'s date: ",dateToday);
                 // grab the list of branches then iterate through the list checking for the difference in days
                 const branchList = await github.rest.repos.listBranches({
-                    owner: context.owner,
-                    repo: context.repo,
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
                   })
                 
                 for (let i = 0; i < branchList.data.length; i++) {
@@ -38,8 +38,8 @@ jobs:
                     if (branchDate == null) continue
                     if (dateDifference(dateToday, branchDate) > daysThreshold) { // only happens if difference is greater than 3, we only want to keep the last 3 night branches
                         const resp = await github.rest.git.deleteRef({
-                            owner: context.owner,
-                            repo: context.repo,
+                            owner: context.repo.owner,
+                            repo: context.repo.repo,
                             ref: branchName,
                           })
                         if (resp.status == "422"){
